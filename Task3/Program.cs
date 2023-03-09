@@ -5,47 +5,51 @@
 // 8 4 2 4
 // Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
 
-int[,] InitMatrix()
+Console.Write("Введите количество строк: ");
+int n = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите количество столбцов: ");
+int m = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine();
+
+int[,] numbers = new int[n, m];
+FillMatrix(numbers);
+
+
+for (int j = 0; j < numbers.GetLength(1); j++)
 {
-    int[,] matrix = new int[3,4];
-    Random rnd = new Random();
+    double avarage = 0;
+    for (int i = 0; i < numbers.GetLength(0); i++)
+    {
+        avarage = (avarage + numbers[i, j]);
+    }
+    avarage = avarage / n;
+    Console.Write(avarage + "; ");
+    Console.WriteLine();
+}
+Console.WriteLine();
+PrintMatrix(numbers);
+
+void FillMatrix(int[,] matrix)
+{
     for (int i = 0; i < matrix.GetLength(0); i++)
     {
         for (int j = 0; j < matrix.GetLength(1); j++)
         {
-            matrix[i,j] = rnd.Next(1,10);
+            matrix[i, j] = new Random().Next(0, 10);
         }
     }
-    return matrix;
 }
 
 void PrintMatrix(int[,] matrix)
 {
+
     for (int i = 0; i < matrix.GetLength(0); i++)
     {
         for (int j = 0; j < matrix.GetLength(1); j++)
         {
-            Console.Write($"{matrix[i,j]} ");
+            Console.Write(matrix[i, j] + " ");
         }
-        Console.WriteLine();
+        Console.WriteLine("");
     }
 }
-
-int FindAverage (int[,]matrix)
-{
-for (int j = 0; j < matrix.GetLength(1); j++)
-    {
-        double average = 0;
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            average = (average + matrix[i, j]);
-        }
-        average = average / 3;
-    }
-}
-
-int[,] matrix = InitMatrix();
-PrintMatrix(matrix);
-int average = FindAverage (matrix);
-
-System.Console.WriteLine($"Среднее арифметическое каждого столбца: {average}");
+Console.WriteLine();
